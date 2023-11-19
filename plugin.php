@@ -1,10 +1,10 @@
 <?php
 /*
-Plugin Name: YOURLSs Password Protection
+Plugin Name: YOURLS 短链接密码保护
 Plugin URI: https://matc.io/yourls-password
-Description: This plugin enables the feature of password protecting your short URLs!
-Version: 1.5
-Author: Matthew
+Description: 使用本插件，您可以使用密码保护您想要的任何短链接！
+Version: 1.5 (CN)
+Author: Matthew (translated version by Mike Wang)
 Author URI: https://matc.io
 */
 
@@ -21,7 +21,7 @@ function warning_redirection( $args ) {
 		yourls_add_option('matthew_pwprotection', 'null');
 		$matthew_pwprotection_array = json_decode(yourls_get_option('matthew_pwprotection'), true);
 		if ($matthew_pwprotection_array === false) {
-			die("Unable to properly enable password protection due to an apparent problem with the database.");
+			die("由于数据库疑似存在问题，密码保护插件无法正确启用。");
 		}
 	}
 
@@ -40,19 +40,20 @@ function warning_redirection( $args ) {
 
 			die();
 		} else {
-			$error = ( isset( $_POST[ 'password' ] ) ? "<script>alertify.error(\"Incorrect Password, try again\")</script>" : "");
-			$matthew_ppu =    yourls__( "Password Protected URL",                       "matthew_pwp" ); // Translate Password Title
-			$matthew_ph =     yourls__( "Password"                                    , "matthew_pwp" ); // Translate the word Password
-			$matthew_sm =     yourls__( "Please enter the password below to continue.", "matthew_pwp" ); // Translate the main message
-			$matthew_submit = yourls__( "Send!"                                       , "matthew_pwp" ); // Translate the Submit button
+			$error = ( isset( $_POST[ 'password' ] ) ? "<script>alertify.error(\"密码不正确，请重试\")</script>" : "");
+			$matthew_ppu =    yourls__( "受密码保护的短链接",                       "matthew_pwp" ); // Translate Password Title
+			$matthew_ph =     yourls__( "密码"                                    , "matthew_pwp" ); // Translate the word Password
+			$matthew_sm =     yourls__( "请在框内输入密码以继续。", "matthew_pwp" ); // Translate the main message
+			$matthew_submit = yourls__( "已发送！"                                       , "matthew_pwp" ); // Translate the Submit button
 			// Displays main "Insert Password" area
 			echo <<<PWP
 			<html>
 				<head>
-					<title>Redirection Notice</title>
+					<title>跳转提示</title>
 					<style>
 						@import url(https://weloveiconfonts.com/api/?family=fontawesome);
 						@import url(https://meyerweb.com/eric/tools/css/reset/reset.css);
+     @import url('https://fonts.loli.net/css2?family=Noto+Sans:wght@300;400;700&display=swap');
 						[class*="fontawesome-"]:before {
 						  font-family: 'FontAwesome', sans-serif;
 						}
@@ -68,7 +69,7 @@ function warning_redirection( $args ) {
 						body {
 						  background: #2c3338;
 						  color: #606468;
-						  font: 87.5%/1.5em 'Open Sans', sans-serif;
+						  font: 87.5%/1.5em 'Noto Sans', sans-serif;
 						  margin: 0;
 						}
 
@@ -83,7 +84,7 @@ function warning_redirection( $args ) {
 
 						input {
 						  border: none;
-						  font-family: 'Open Sans', Arial, sans-serif;
+						  font-family: 'Noto Sans',  sans-serif;
 						  font-size: 14px;
 						  line-height: 1.5em;
 						  padding: 0;
@@ -166,20 +167,21 @@ function warning_redirection( $args ) {
 						  padding-left: 5px;
 						}
 					</style>
+    <!-- 翻译者：JSDelivr 国内连接状况堪忧，故替换为 BootCDN。 -->
 					<!-- JavaScript -->
-					<script src="//cdn.jsdelivr.net/npm/alertifyjs@1.11.4/build/alertify.min.js"></script>
+					<script src="//cdn.bootcdn.net/ajax/libs/AlertifyJS/1.11.4/alertify.min.js"></script>
 
 					<!-- CSS -->
-					<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.11.4/build/css/alertify.min.css"/>
+					<link rel="stylesheet" href="//cdn.bootcdn.net/ajax/libs/AlertifyJS/1.11.4/css/alertify.min.css"/>
 					<!-- Default theme -->
-					<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.11.4/build/css/themes/default.min.css"/>
+					<link rel="stylesheet" href="//cdn.bootcdn.net/ajax/libs/AlertifyJS/1.11.4/css/themes/default.min.css"/>
 				</head>
 				<body>
 					<div class="container">
 						<div id="login">
 							<form method="post">
 								<fieldset class="clearfix">
-									<p><span class="fontawesome-lock"></span><input type="password" name="password" value="Password" onBlur="if(this.value == '') this.value = 'Password'" onFocus="if(this.value == 'Password') this.value = ''" required></p>
+									<p><span class="fontawesome-lock"></span><input type="password" name="password" value="请输入密码..." onBlur="if(this.value == '') this.value = '请输入密码...'" onFocus="if(this.value == '请输入密码...') this.value = ''" required></p>
 									<p><input type="submit" value="$matthew_submit"></p>
 								</fieldset>
 							</form>
@@ -231,7 +233,7 @@ function matthew_pwprotection_process_new() {
 	// Update database
 	yourls_update_option( 'matthew_pwprotection', json_encode( $_POST[ 'password' ] ) );
 	
-	echo "<p style='color: green'>Success!</p>";
+	echo "<p style='color: green'>成功！</p>";
 }
 
 // Display Form
@@ -267,9 +269,9 @@ function matthew_pwprotection_process_display() {
 	
 	$query = $ydb->fetchAll($sql, $binds);
 
-	$matthew_su = yourls__( "Short URL"   , "matthew_pwp" ); // Translate "Short URL"
-	$matthew_ou = yourls__( "Original URL", "matthew_pwp" ); // Translate "Original URL"
-	$matthew_pw = yourls__( "Password"    , "matthew_pwp" ); // Translate "Password"
+	$matthew_su = yourls__( "短链接"   , "matthew_pwp" ); // Translate "Short URL"
+	$matthew_ou = yourls__( "源链接", "matthew_pwp" ); // Translate "Original URL"
+	$matthew_pw = yourls__( "密码"    , "matthew_pwp" ); // Translate "Password"
 
 	// Protect action with nonce
 	$matthew_pwprotection_noncefield = yourls_nonce_field( "matthew_pwprotection_update" );
@@ -291,7 +293,7 @@ function matthew_pwprotection_process_display() {
 	</style>
 	<div style="overflow-x:auto;">
 		<form method="post" id="form_submit">
-		<label>Search Short URL:</label>
+		<label>搜索短链接：</label>
 		<input type="text" id="txt_search" size="20">
 		<input id="btn_search" type="button" value="Search">
 			<table>
@@ -312,14 +314,14 @@ TB;
 			$sURL = $url;
 		}
 		if( array_key_exists( $short, (array)$matthew_pwprotection_array ) ){ // Check if URL is currently password protected or not
-			$text = yourls__( "Enable?" );
+			$text = yourls__( "要启用吗？" );
 			$password = "DONOTCHANGE_8fggwrFrRXvqndzw";
 			$checked = " checked";
 			$unchecked = '';
 			$style = '';
 			$disabled = '';
 		} else {
-			$text = yourls__( "Enable?" );
+			$text = yourls__( "要启用吗？" );
 			$password = '';
 			$checked = '';
 			$unchecked = ' disabled';
@@ -334,7 +336,7 @@ TB;
 					<td>
 						<input type="checkbox" name="checked[{$short}]" class="matthew_pwprotection_checkbox" value="enable" data-input="$short"$checked> $text
 						<input type="hidden" name="unchecked[{$short}]" id="{$short}_hidden" value="true"$unchecked>
-						<input id="$short" type="password" name="password[$short]" style="$style" value="$password" onkeypress="return checkIfSubmitPassword(event);" placeholder="Password..."$disabled ><br>
+						<input id="$short" type="password" name="password[$short]" style="$style" value="$password" onkeypress="return checkIfSubmitPassword(event);" placeholder="密码..."$disabled ><br>
 					</td>
 				</tr>
 TABLE;
@@ -348,9 +350,9 @@ TABLE;
 	echo <<<END
 			</table>
 			$matthew_pwprotection_noncefield
-			<input id="btn_previous" type="button" value="Previous">
-			<input id="btn_next" type="button" value="Next">
-			<p><input id="btn_submit" type="button" value="Submit"></p>
+			<input id="btn_previous" type="button" value="前一页">
+			<input id="btn_next" type="button" value="下一页">
+			<p><input id="btn_submit" type="button" value="发送"></p>
 		</form>
 	</div>
 	<script>
