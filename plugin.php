@@ -199,7 +199,7 @@ PWP;
 // Register plugin page in admin page
 yourls_add_action( 'plugins_loaded', 'matthew_pwprotection_display_panel' );
 function matthew_pwprotection_display_panel() {
-	yourls_register_plugin_page( 'matthew_pwp', 'Password Protection', 'matthew_pwprotection_display_page' );
+	yourls_register_plugin_page( 'matthew_pwp', '密码保护', 'matthew_pwprotection_display_page' );
 }
 
 // Function which will draw the admin page
@@ -295,7 +295,7 @@ function matthew_pwprotection_process_display() {
 		<form method="post" id="form_submit">
 		<label>搜索短链接：</label>
 		<input type="text" id="txt_search" size="20">
-		<input id="btn_search" type="button" value="Search">
+		<input id="btn_search" type="button" value="搜索">
 			<table>
 				<tr>
 					<th>$matthew_su</th>
