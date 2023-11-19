@@ -44,7 +44,7 @@ function warning_redirection( $args ) {
 			$matthew_ppu =    yourls__( "受密码保护的短链接",                       "matthew_pwp" ); // Translate Password Title
 			$matthew_ph =     yourls__( "密码"                                    , "matthew_pwp" ); // Translate the word Password
 			$matthew_sm =     yourls__( "请在框内输入密码以继续。", "matthew_pwp" ); // Translate the main message
-			$matthew_submit = yourls__( "已发送！"                                       , "matthew_pwp" ); // Translate the Submit button
+			$matthew_submit = yourls__( "确认"                                       , "matthew_pwp" ); // Translate the Submit button
 			// Displays main "Insert Password" area
 			echo <<<PWP
 			<html>
@@ -167,7 +167,7 @@ function warning_redirection( $args ) {
 						  padding-left: 5px;
 						}
 					</style>
-    <!-- 翻译者：JSDelivr 国内连接状况堪忧，故替换为 BootCDN。 -->
+     <!-- 翻译者：JSDelivr 国内连接状况堪忧，故替换为 BootCDN。 -->
 					<!-- JavaScript -->
 					<script src="//cdn.bootcdn.net/ajax/libs/AlertifyJS/1.11.4/alertify.min.js"></script>
 
@@ -352,7 +352,7 @@ TABLE;
 			$matthew_pwprotection_noncefield
 			<input id="btn_previous" type="button" value="前一页">
 			<input id="btn_next" type="button" value="下一页">
-			<p><input id="btn_submit" type="button" value="发送"></p>
+			<p><input id="btn_submit" type="button" value="提交"></p>
 		</form>
 	</div>
 	<script>
