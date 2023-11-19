@@ -314,14 +314,14 @@ TB;
 			$sURL = $url;
 		}
 		if( array_key_exists( $short, (array)$matthew_pwprotection_array ) ){ // Check if URL is currently password protected or not
-			$text = yourls__( "要启用吗？" );
+			$text = yourls__( "启用密码？" );
 			$password = "DONOTCHANGE_8fggwrFrRXvqndzw";
 			$checked = " checked";
 			$unchecked = '';
 			$style = '';
 			$disabled = '';
 		} else {
-			$text = yourls__( "要启用吗？" );
+			$text = yourls__( "启用密码？" );
 			$password = '';
 			$checked = '';
 			$unchecked = ' disabled';
